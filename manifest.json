@@ -3,8 +3,8 @@
 
   "name": "BUL OCRA for Chrome",
   "description": "Reserve course materials from anywhere.",
-  "version": "1.0",
-  
+  "version": "0.9",
+
   "homepage_url": "https://library.brown.edu/reserves",
 
   "browser_action": {
