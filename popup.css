@@ -1,0 +1,56 @@
+body {
+  font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+  font-size: 100%;
+  width: 450px;
+}
+h2, h3 {
+    margin: 0 0 .3rem;
+}
+h2 {
+    font-weight: normal;
+    font-style: italic;
+}
+#status {
+  /* avoid an excessively wide status text */
+  white-space: pre;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  border-radius: 8px;
+
+  padding: .3rem .8rem;
+  margin-bottom: .8rem;
+  border: 1px solid #cccc99;
+  background-color: #ffffcc;
+}
+#choices div ul {
+      max-height: 8em;
+      overflow-y: auto;
+      list-style-type: none;
+      margin: 0;
+      padding: 0 0 0 .8rem;
+}
+ #choices div ul li {
+     overflow: hidden;
+     text-overflow: ellipsis;
+     white-space: nowrap;
+ }
+
+ #page {
+     border-bottom: 1px dotted #999;
+     margin-bottom: .5rem;
+     padding-bottom: .6rem;
+ }
+ #sidebar {
+     float: left;
+     margin: .5rem 0;
+     width: 75px;
+ }
+ #sidebar img {
+     display: block;
+     margin: 0 auto;
+ }
+ div#body {
+     border-left: 1px dotted #999;
+     margin-left: 78px;
+     padding-left: 10px;
+ }

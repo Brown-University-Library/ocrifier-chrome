@@ -1,0 +1,6 @@
+var target_page = 'library.brown.edu/reserves/cr/ocrify/';
+var logo_image = 'brownshield.png';
+
+var status_start = "Working...";
+var status_ready = 'Ready. Click a link below to add that item to OCRA.';
+var status_nothing_to_do = 'Found nothing we can add to course reserves.';
