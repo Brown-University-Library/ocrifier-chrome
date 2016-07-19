@@ -1,27 +1,40 @@
 body {
-  font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
-  font-size: 100%;
-  width: 450px;
+    background-color: rgb(254, 253, 244);
+    background-image: url('background.svg');
+    background-position: left;
+    background-repeat: repeat-y;
+    font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+    font-size: 100%;
+    width: 450px;
 }
 h2, h3 {
     margin: 0 0 .3rem;
+    color: #78615f;
+    line-height: 1.25;
 }
 h2 {
-    font-weight: normal;
-    font-style: italic;
+    font-size: 1.5rem;
+    margin-bottom: 3px;
+}
+
+h3 {
+    font-size: 1.1rem;
+    font-weight: bolder;
+    text-transform: uppercase;
 }
 #status {
-  /* avoid an excessively wide status text */
-  white-space: pre;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  border-radius: 8px;
+    /* avoid an excessively wide status text */
+    white-space: pre;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    border-radius: 8px;
 
-  padding: .3rem .8rem;
-  margin-bottom: .8rem;
-  border: 1px solid #cccc99;
-  background-color: #ffffcc;
+    padding: .3rem .8rem;
+    margin-bottom: .8rem;
+    border: 1px solid #cccc99;
+    background-color: #ffffcc;
 }
+
 #choices div ul {
       max-height: 8em;
       overflow-y: auto;
@@ -36,7 +49,6 @@ h2 {
  }
 
  #page {
-     border-bottom: 1px dotted #999;
      margin-bottom: .5rem;
      padding-bottom: .6rem;
  }
@@ -47,10 +59,9 @@ h2 {
  }
  #sidebar img {
      display: block;
-     margin: 0 auto;
+     margin: 0 0 0 2px;
+     max-width: 65px;
  }
- div#body {
-     border-left: 1px dotted #999;
-     margin-left: 78px;
-     padding-left: 10px;
+ #body {
+     margin-left: 85px;
  }

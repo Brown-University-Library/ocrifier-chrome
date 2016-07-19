@@ -1,0 +1,10 @@
+
+<svg width="450" height="1" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <!--TODO: Should be able to put the styles in scss populated by variables.-->
+    <style><![CDATA[
+        .bggstart { stop-color: #2b0b07; stop-opacity: 1; }
+        .bggend { stop-color: white; stop-opacity: 1; }
+      ]]></style>
+    <rect width="85" height="100%" fill="#2b0b07"/>
+    <rect width="4" height="100%" x="81" fill="#c41700" />
+</svg>
