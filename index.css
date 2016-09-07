@@ -1,0 +1,44 @@
+body {
+    background-image: url('BULheader_body.png');
+    background-repeat: repeat-x; 
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+    margin: 0;
+    width: 100%;
+}
+
+h4 {
+    font-size: 2.1rem;
+    margin-bottom: 3px;
+    color: #78615f;
+    font-weight: bold;
+    line-height: 1.25;
+    border-bottom: 1px solid #ccc;
+}
+
+header.head .liblink {
+    display: block;
+    height: 87px;
+    width: 500px;
+}
+
+header.head .container {
+    background-image: url('BULheader.png');
+    height: 87px;
+    margin-top: 17px;
+}
+
+header.head img {
+    float: left;
+    margin: 1rem 1rem 1rem 0;
+}
+
+header.head h1 {
+    color: white;
+    padding: 2.5rem 0;
+    text-transform: uppercase;
+}
+
+div.container {
+    margin: 0 auto;
+    max-width: 900px;
+}
