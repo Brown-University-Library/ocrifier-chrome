@@ -69,6 +69,10 @@ background-color: #ffffcc;
     margin-left: 85px;
 }
 
+footer {
+    margin-top: 1rem;
+}
+
 footer a {
     color: #2b0b07;
     float: right;

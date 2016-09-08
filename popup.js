@@ -1,5 +1,3 @@
-
-
 //Makes links work.
 window.addEventListener('click',function(e){
   if(e.target.href!==undefined){
