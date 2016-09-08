@@ -1,4 +1,4 @@
-var target_page = 'library.brown.edu/reserves/cr/ocrify/';
+var target_page = 'https://library.brown.edu/reserves/cr/ocrify/';
 var logo_image = 'brownshield.png';
 
 var status_start = "Working...";
