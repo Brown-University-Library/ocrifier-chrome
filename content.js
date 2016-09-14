@@ -58,10 +58,18 @@
         page = true;
         //TODO: Look at window.location and see if there's a PMID/DOI/ISBN there we can use.
     } else if ( window.location.href.indexOf('amazon.') > -1 &&
-               window.location.href.indexOf('/dp/') > -1 ) {
+               ( window.location.href.indexOf('/dp/') > -1 || window.location.href.indexOf('/ASIN/') > -1 ) ) {
 
         outp.forEach( function(i) {
             if ( 'isbn' == i.type && window.location.href.indexOf('/dp/'+i.match) > -1 ) {
+                outp.push({
+                    type:       'page',
+                    match:      i.match,
+                    clas:       'isbn',
+                    label:      'ISBN',
+                });
+            }
+            if ( 'isbn' == i.type && window.location.href.indexOf('/ASIN/'+i.match) > -1 ) {
                 outp.push({
                     type:       'page',
                     match:      i.match,
