@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             setStatus(status_ready);
         } else {
-            //Shouldn't happen. There's always the page URL.
+            //Shouldn't happen. There's always the page URL as a last resort.
             setStatus(status_nothing_to_do);
         }
     });

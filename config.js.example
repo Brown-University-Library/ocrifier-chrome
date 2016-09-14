@@ -1,4 +1,5 @@
-var target_page = 'https://library.brown.edu/reserves/cr/ocrify/';
+var ocra_root = 'https://worfdev.services.brown.edu/ocra_dev/';
+var target_page = ocra_root + 'cr/ocrify/';
 var logo_image = 'brownshield.png';
 
 var status_start = "Working...";
