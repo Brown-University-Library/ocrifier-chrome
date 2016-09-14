@@ -4,6 +4,6 @@
         .bggstart { stop-color: #2b0b07; stop-opacity: 1; }
         .bggend { stop-color: white; stop-opacity: 1; }
       ]]></style>
-    <rect width="85" height="100%" fill="#2b0b07"/>
-    <rect width="4" height="100%" x="81" fill="#c41700" />
+    <rect width="85" height="100%" fill="#4e3629"/>
+    <rect width="4" height="100%" x="81" fill="#ed1c24" />
 </svg>
