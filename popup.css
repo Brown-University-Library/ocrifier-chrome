@@ -23,16 +23,15 @@ font-weight: bolder;
 text-transform: uppercase;
 }
 #status {
-/* avoid an excessively wide status text */
-white-space: pre;
-text-overflow: ellipsis;
-overflow: hidden;
-border-radius: 8px;
+    white-space: pre;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    border-radius: 8px;
 
-padding: .3rem .8rem;
-margin-bottom: .8rem;
-border: 1px solid #cccc99;
-background-color: #ffffcc;
+    padding: .3rem .8rem;
+    margin-bottom: .8rem;
+    border: 1px solid #FFC72C;
+    background-color: rgba(255,199,44,.2);
 }
 
 #choices div ul {
@@ -63,7 +62,7 @@ background-color: #ffffcc;
     margin: 0 0 0 2px;
     max-width: 65px;
     position: absolute;
-    top: 3rem;
+    /* top: 3rem; */
 }
 #body {
     margin-left: 85px;
