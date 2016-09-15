@@ -1,6 +1,6 @@
 <html lang="en">
     <head>
-        <title>BUL OCRA Extension for Chrome</title>
+        <title>{% if page.title %}{{ page.title }} |{% endif %} {{ site.name }}</title>
         <link rel="stylesheet" href="index.css"/>
     </head>
     <body>
@@ -10,7 +10,7 @@
             </div>
         </header>
         <div class="container">
-            <h4>OCRA Chrome Extension</h4>
+            {{ content }}
         </div>
     </body>
 </html>
