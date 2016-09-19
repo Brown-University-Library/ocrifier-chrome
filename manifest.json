@@ -1,19 +1,28 @@
 {
   "manifest_version": 2,
 
-  "name": "BUL OCRA for Chrome",
+  "name": "BUL Ocrifier for Chrome",
   "description": "Reserve course materials from anywhere.",
   "version": "0.9",
 
   "homepage_url": "https://library.brown.edu/reserves",
 
   "browser_action": {
-    "default_icon": "ocra_extension19.png",
+    "default_icon": {                    
+            "19": "ocra_extension19.png",
+            "38": "ocra_extension_38.png"
+    },     
     "default_popup": "popup.html",
     "default_title": "Add items from this page to your OCRA course reserves."
   },
   "permissions": [
-    "activeTab",
-    "https://library.brown.edu/"
+    "activeTab"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": ["https://search.library.brown.edu/catalog/b*"],
+      "js": ["config.js", "josiahlink.js"]
+    }
   ]
 }
