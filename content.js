@@ -1,7 +1,7 @@
 //The output of this function will be returned to popup and usable by its callback.
 (function() {
-    //Don't do this on Josiah, Worfdev, or OCRA.
-    if ( window.location.hostname.indexOf('worfdev.services.brown.edu') > -1 ) return [];
+    //Don't do this on Worfdev, or OCRA.
+    if ( window.location.hostname.indexOf('//worfdev.services.brown.edu') > -1 ) return [];
     if ( window.location.href.indexOf('//library.brown.edu/reserves') > -1 ) return [];
 
 
@@ -56,20 +56,13 @@
             label:      'ISBN',
         });
         page = true;
-        //TODO: Look at window.location and see if there's a PMID/DOI/ISBN there we can use.
     } else if ( window.location.href.indexOf('amazon.') > -1 &&
-               ( window.location.href.indexOf('/dp/') > -1 || window.location.href.indexOf('/ASIN/') > -1 ) ) {
+               ( window.location.href.indexOf('/dp/') > -1 || 
+                 window.location.href.indexOf('/ASIN/') > -1 || 
+                 window.location.href.indexOf('/product/') > -1 ) ) {
 
         outp.forEach( function(i) {
-            if ( 'isbn' == i.type && window.location.href.indexOf('/dp/'+i.match) > -1 ) {
-                outp.push({
-                    type:       'page',
-                    match:      i.match,
-                    clas:       'isbn',
-                    label:      'ISBN',
-                });
-            }
-            if ( 'isbn' == i.type && window.location.href.indexOf('/ASIN/'+i.match) > -1 ) {
+            if ( 'isbn' == i.type && window.location.href.indexOf(i.match) > -1 ) {
                 outp.push({
                     type:       'page',
                     match:      i.match,
