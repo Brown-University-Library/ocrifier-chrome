@@ -22,9 +22,12 @@
 
     var outp = [];
     var patterns = [
-        { pat: /isbn.{0,20}\s(\d\-?\d{3}\-?\d{5}\-?[1-9X])/gi, type: 'isbn', },
-        { pat: /isbn.{0,20}(\d{3}-?\d{10})/gi, type: 'isbn', },
+        //{ pat: /(\d\-?\d{3}\-?\d{5}\-?x)/gi, type: 'isbn', }, <- Slow.
+        { pat: /(\d\-\d{3}\-\d{5}\-[\dx])/gi, type: 'isbn', },
+        { pat: /isbn.{0,30}\s(\d\-?\d{3}\-?\d{5}\-?[\dx])/gi, type: 'isbn', },
+        { pat: /(978-?\d{10})/gi, type: 'isbn', },
         { pat: /(10[.][0-9]{3,}(?:[.][0-9]+)*\/(?:(?!["&\'?<>])\S)+)/g, type: 'doi', },
+        { pat: /(OL\d{2,10}[WM])/g, type: 'olid' },
     ]
 
     if ( window.location.href.indexOf('www.ncbi.nlm.nih.gov/pubmed') > -1 ) {
@@ -70,6 +73,14 @@
                     label:      'ISBN',
                 });
             }
+        });
+        page = true;
+    } else if ( m = /(https:\/\/openlibrary.org\/(books|works)\/(OL\d{2,10}[WM]))/.exec(window.location.href) ) {
+        outp.push({
+            type:       'page',
+            match:      m[3],
+            clas:       'olid',
+            label:      'OpenLibrary ID',
         });
         page = true;
     } else if ( m = /(^https?:\/\/www.ncbi.nlm.nih.gov\/pubmed\/([0-9]{8}))/.exec(window.location.href) ) {
