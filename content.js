@@ -22,12 +22,15 @@
 
     var outp = [];
     var patterns = [
-        { pat: /isbn.{0,30}[^\d\-]([\-\d]{12}[\dx])[^\d\-]/gi, type: 'isbn', },
+        { pat: /isbn.{0,30}[^\d\-](\d[\-\d]{11}[\dx])[^\d\-]/gi, type: 'isbn', },
         { pat: /isbn.{0,30}[^\d\-](\d{9}[\dx])[^\d\-]/gi, type: 'isbn', },
         { pat: /(978-?\d{10})/gi, type: 'isbn', },
         { pat: /(10[.][0-9]{3,}(?:[.][0-9]+)*\/(?:(?!["&\'?<>])\S)+)/g, type: 'doi', },
         { pat: /(OL\d{2,10}[WM])/g, type: 'olid' },
-    ]
+        { pat: /(ocm\d{8})/g, type: 'oclc'},
+        { pat: /(ocn\d{9})/g, type: 'oclc'},
+        { pat: /(on\d{10,})/g, type: 'oclc'},
+    ];
 
     if ( window.location.href.indexOf('www.ncbi.nlm.nih.gov/pubmed') > -1 ) {
         patterns.push({ pat: /\b([\d]{8})\b/gi, type: 'pmid', });
@@ -90,6 +93,13 @@
             label:      'PubMed ID',
         });
         page = true;
+    } else if ( m = /(^https?:\/\/www.worldcat.org\/.+\/oclc\/([0-9]{8,}))/.exec(window.location.href) ) {
+        outp.push({
+            type:       'page',
+            match:      m[2],
+            clas:       'oclc',
+            label:      'OCLC Number',
+        });
     } else if ( doi = document.querySelector('meta[name="citation_doi"]') ) {
         outp.push({
             type:       'page',
@@ -132,6 +142,6 @@
             label:      'URL',
         })
     }
-
+console.log(outp);
     return outp;
 })();
