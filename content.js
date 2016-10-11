@@ -22,9 +22,8 @@
 
     var outp = [];
     var patterns = [
-        //{ pat: /(\d\-?\d{3}\-?\d{5}\-?x)/gi, type: 'isbn', }, <- Slow.
-        { pat: /(\d\-\d{3}\-\d{5}\-[\dx])/gi, type: 'isbn', },
-        { pat: /isbn.{0,30}\s(\d\-?\d{3}\-?\d{5}\-?[\dx])/gi, type: 'isbn', },
+        { pat: /isbn.{0,30}[^\d\-]([\-\d]{12}[\dx])[^\d\-]/gi, type: 'isbn', },
+        { pat: /isbn.{0,30}[^\d\-](\d{9}[\dx])[^\d\-]/gi, type: 'isbn', },
         { pat: /(978-?\d{10})/gi, type: 'isbn', },
         { pat: /(10[.][0-9]{3,}(?:[.][0-9]+)*\/(?:(?!["&\'?<>])\S)+)/g, type: 'doi', },
         { pat: /(OL\d{2,10}[WM])/g, type: 'olid' },
