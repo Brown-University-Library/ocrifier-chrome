@@ -1,7 +1,7 @@
-var ocra_root = 'https://worfdev.services.brown.edu/ocra_dev/';
-var target_page = ocra_root + 'cr/ocrify/';
-var logo_image = 'brownshield.png';
+var ocra_root = 'https://library.brown.edu/reserves/';
+var ocra_target_page = ocra_root + 'cr/ocrify/';
+var ocra_logo_image = 'brownshield.png';
 
-var status_start = "Working...";
-var status_ready = 'Ready. Click a link below to add that item to OCRA.';
-var status_nothing_to_do = 'Found nothing we can add to course reserves.';
+var ocra_status_start = "Working...";
+var ocra_status_ready = 'Ready. Click a link below to add that item to OCRA.';
+var ocra_status_nothing_to_do = 'Found nothing we can add to course reserves.';
