@@ -1,7 +1,7 @@
 (function() {
     var bib = /b[0-9]{7}/.exec(window.location.href);
     var bibnum = bib[0];
-    var url = target_page+"?bibnum="+bibnum;
+    var url = ocra_target_page+"?bibnum="+bibnum;
     var lnk = "<a href='"+url+"' target='_blank'>Reserve this item on OCRA</a>";
     var lilnk = '<li class="ocrify">'+lnk+'</li>';
     

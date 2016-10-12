@@ -4,7 +4,7 @@
   "name": "BUL Ocrifier for Chrome",
   "short_name": "Ocrifier",
   "description": "Reserve course materials from anywhere.",
-  "version": "1.0.1",
+  "version": "1.0.1.1",
 
   "icons": { "16": "ocra_extension_16.png",
            "48": "ocra_extension_48.png",
