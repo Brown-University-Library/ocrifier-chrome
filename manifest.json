@@ -4,15 +4,19 @@
   "name": "BUL Ocrifier for Chrome",
   "short_name": "Ocrifier",
   "description": "Reserve course materials from anywhere.",
-  "version": "1.0",
+  "version": "1.0.1",
+
+  "icons": { "16": "ocra_extension_16.png",
+           "48": "ocra_extension_48.png",
+          "128": "ocra_extension_128.png" },
 
   "homepage_url": "https://library.brown.edu/reserves",
 
   "browser_action": {
     "default_icon": {                    
-            "19": "ocra_extension19.png",
+            "19": "ocra_extension_19.png",
             "38": "ocra_extension_38.png",
-            "128": "ocra_extension_app_icon.png"
+            "128": "ocra_extension_128.png"
 
     },     
     "default_popup": "popup.html",
