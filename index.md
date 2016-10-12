@@ -3,7 +3,7 @@ layout: default
 ---
 #### OCRA Chrome Extension
 
-The Ocrifier tool is designed to make it easy for OCRA users (faculty and staff) to add items from the Internet to course reserves. Click the Ocrify button ![](img/ocrify-button.png) on any page to add a URL or a reference to a book or article to any of your OCRA courses.
+The Ocrifier tool is designed to make it easy for OCRA users (faculty and staff) to add items from the Internet to course reserves. Click the Ocrify button on any page to add a URL or a reference to a book or article to any of your OCRA courses.
 
 ##### Step 1
 
