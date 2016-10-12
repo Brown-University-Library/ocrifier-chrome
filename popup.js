@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setStatus(ocra_status_start);
 
     chrome.tabs.executeScript({file: 'content.js'}, function(data) {
-        if ( data[0].length > 0 ) {
+        if ( undefined !== data && data[0].length > 0 ) {
             data[0].forEach(function(m) {
                 el = document.getElementById(m.type);
                 el.removeAttribute('hidden');
