@@ -4,7 +4,6 @@
     if ( window.location.hostname.indexOf('//worfdev.services.brown.edu') > -1 ) return [];
     if ( window.location.href.indexOf('//library.brown.edu/reserves') > -1 ) return [];
 
-
     if ( window.location.hostname.indexOf('search.library.brown.edu') > -1 ) {
         var bib = /b[0-9]{7}/.exec(window.location.href);
         if ( bib ) {
@@ -35,7 +34,7 @@
     if ( window.location.href.indexOf('www.ncbi.nlm.nih.gov/pubmed') > -1 ) {
         patterns.push({ pat: /\b([\d]{8})\b/gi, type: 'pmid', });
     }
-
+    
     patterns.forEach( function(i) {
         if ( undefined === i.mat || window.location.href.indexOf(i.mat) > -1 ) {
             var m = i.pat.exec(document.body.textContent); // document.body.textContent?
@@ -50,7 +49,7 @@
             }
         }
     });
-
+    
     var page = false;
     if ( bookisbn = document.querySelector('meta[property="book:isbn"],meta[property="books:isbn"],meta[name="dc.Identifier"][scheme="isbn"]') ) {
         //Is dc:identifier(schema=isbn) actually used?
@@ -77,6 +76,19 @@
             }
         });
         page = true;
+    } else if ( m = window.location.href.indexOf('josiah.brown.edu') > -1 ) {
+        //Josiah Classic.
+        var bib = /b[0-9]{7}/i.exec(document.body.textContent);
+        if ( bib ) {
+            var bibnum = bib[0];
+
+            return [{
+                type:       'page',
+                match:      bibnum,
+                clas:       'bibnum',
+                label:      'Josiah',
+            }];
+        }
     } else if ( m = /(https:\/\/openlibrary.org\/(books|works)\/(OL\d{2,10}[WM]))/.exec(window.location.href) ) {
         outp.push({
             type:       'page',
@@ -142,6 +154,5 @@
             label:      'URL',
         })
     }
-console.log(outp);
     return outp;
 })();
