@@ -1,8 +1,8 @@
-##BUL OCRA Chrome Extension
+## BUL OCRA Chrome Extension
 
 This is a simple Google Chrome extension intended to streamline adding items to Brown University Library's Online Course Reserve Application (OCRA).
 
-### Installing the dev version:
+### Installing the development version:
 
 1. Clone or download the extension to a local directory.
 1. Copy `config.js.example` to `config.js`.
