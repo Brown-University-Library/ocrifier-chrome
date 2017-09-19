@@ -24,12 +24,5 @@
   },
   "permissions": [
     "activeTab"
-  ],
-
-  "content_scripts": [
-    {
-      "matches": ["https://search.library.brown.edu/catalog/b*"],
-      "js": ["config.js", "josiahlink.js"]
-    }
   ]
 }
