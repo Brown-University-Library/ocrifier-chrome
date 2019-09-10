@@ -1,9 +1,65 @@
 //The output of this function will be returned to popup and usable by its callback.
 (function() {
-    //Don't do this on Worfdev, or OCRA.
-    if ( window.location.hostname.indexOf('//worfdev.services.brown.edu') > -1 ) return [];
+
+    function checkISBN(test) {
+        //TODO: Test.
+        test = test.replace(/-/g, '')
+        if ( 10 == test.length ) {            
+            //Thanks to Wikipedia: 
+            var i, s = 0, t = 0;
+            for (i = 0; i < 10; i++) {
+                t += parseInt(test[i], 10);
+                s += t;
+                console.log('st', s, t);
+            }
+            return !Boolean(s % 11);
+        } else if ( 13 == test.length ) {
+            var mult = [1, 3];
+            var check = test.substr(0,12).split('').map(parseFloat)
+                             .reduce((a, v, i) => a + (v * mult[i%2])) % 10
+            check = (0 == check) ? check : 10 - check;
+            var checkdig = parseInt(test.substr(12), 10)
+            console.log("checking", check, checkdig, check === checkdig)
+            return check === checkdig;
+        } else return false;
+    }
+
+    class Matcher {
+        constructor(pat, type) {
+            this.pattern = pat;
+            this.type = type;
+        }
+
+        match(string) {
+            var mts = string.matchAll(this.pattern);
+            
+            console.log(this.type, this.pattern, mts);
+            var outp = new Set();
+            //If this.type is ISBN, make sure the check digits are correct.
+            for ( var mt of mts ) {
+                if ( 'isbn' != this.type || checkISBN(mt[1])) 
+                    outp.add(mt[1]);
+            }
+
+            return outp;
+        }
+    }
+
+    //Don't do this on OCRA.
     if ( window.location.href.indexOf('//library.brown.edu/reserves') > -1 ) return [];
 
+    //TODO: Move this into the Matcher class? Or into the popup code?
+    labels = {
+        'bibnum': 'Josiah',
+        'doi'   : 'DOI',
+        'olid'  : 'OpenLibrary ID',
+        'pmid'  : 'PubMed ID',
+        'oclc'  : 'OCLC Number',
+        'isbn'  : 'ISBN',
+        'url'   : 'URL',
+    }
+
+    //If this is Josiah, just grab the bib number and use that.
     if ( window.location.hostname.indexOf('search.library.brown.edu') > -1 ) {
         var bib = /b[0-9]{7}/.exec(window.location.href);
         if ( bib ) {
@@ -20,38 +76,63 @@
     }
 
     var outp = [];
+    var urlmatch = false;
+
+    //Set regexes we'll use to find potential items: 
+    //  ISBN, DOI, OpenLibrary IDs, and OCLC/WorldCat numbers.
     var patterns = [
-        { pat: /isbn.{0,30}[^\d\-](\d[\-\d]{11}[\dx])[^\d\-]/gi, type: 'isbn', },
-        { pat: /isbn.{0,30}[^\d\-](\d{9}[\dx])[^\d\-]/gi, type: 'isbn', },
-        { pat: /(978-?\d{10})/gi, type: 'isbn', },
-        { pat: /(10[.][0-9]{3,}(?:[.][0-9]+)*\/(?:(?!["&\'?<>])\S)+)/g, type: 'doi', },
-        { pat: /(OL\d{2,10}[WM])/g, type: 'olid' },
-        { pat: /(ocm\d{8})/g, type: 'oclc'},
-        { pat: /(ocn\d{9})/g, type: 'oclc'},
-        { pat: /(on\d{10,})/g, type: 'oclc'},
+        new Matcher(/[^\d\-]((\d-?){11}[\dx])[^\d\-]/gi, 'isbn'),
+        new Matcher(/[^\d\-](\d{9}[\dx])[^\d\-]/gi, 'isbn'),
+        new Matcher(/[^\d\-](978\-?\d{10})[^\d\-]/g, 'isbn'),
+        new Matcher(/(10[.][0-9]{3,}(?:[.][0-9]+)*\/(?:(?!["&\'?<>])\S)+)/g, 'doi'),
+        new Matcher(/(OL\d{2,10}[WM])/g, 'olid'),
+        new Matcher(/(ocm\d{8})/g, 'oclc'),
+        new Matcher(/(ocn\d{9})/g, 'oclc'),
+        new Matcher(/(on\d{10,})/g, 'oclc'),
     ];
 
+    //If we're on PubMed, look for PubMed IDs.
     if ( window.location.href.indexOf('www.ncbi.nlm.nih.gov/pubmed') > -1 ) {
-        patterns.push({ pat: /\b([\d]{8})\b/gi, type: 'pmid', });
+        patterns.push(new Matcher(/\b([\d]{8})\b/gi, 'pmid'));
     }
     
-    patterns.forEach( function(i) {
-        if ( undefined === i.mat || window.location.href.indexOf(i.mat) > -1 ) {
-            var m = i.pat.exec(document.body.textContent); // document.body.textContent?
-            while ( m !== null ) {
-                if ( outp.find(function(el) {return (el.type == i.type && el.match == m[1])}) === undefined ) {
-                    outp.push({
-                        type:       i.type,
-                        match:      m[1].trim(),
-                    });
-                }
-                m = i.pat.exec(document.body.innerHTML);
+    var page = false;
+    //Match each pattern against the page's contents.
+    patterns.forEach( function(pat) {
+        ms = pat.match(document.body.textContent);
+        console.log('ms', ms)
+        ms.forEach((v, m) => {
+            if ( outp.find(function(el) {return (el.type == pat.type && el.match == m)}) === undefined ) {
+                //Add this match only if it's not in output.
+                console.log('adding', pat.type, m)
+                outp.push({
+                    type:       pat.type,
+                    match:      m.trim(),
+                });
             }
+        });
+
+        if ( !urlmatch ) {
+            urlms = pat.match(window.location.href);
+            console.log('urlms', urlms);
+            urlms.forEach((v, m) => {
+                if ( !urlmatch ) {
+                    console.log('adding', pat.type, m)
+                    urlmatch = {
+                        type:       pat.type,
+                        match:      m.trim(),
+                    };
+                }
+            });
         }
     });
     
-    var page = false;
-    if ( bookisbn = document.querySelector('meta[property="book:isbn"],meta[property="books:isbn"],meta[name="dc.Identifier"][scheme="isbn"]') ) {
+    console.log('output', outp);
+
+    //Everything below here tries to find an ID for this page.
+    //Is there an ISBN in a <meta> tag somewhere?
+    if ( bookisbn = document.querySelector('meta[property="book:isbn"],meta[property="books:isbn"],meta[name="dc.Identifier"][scheme="isbn"]') 
+            && checkISBN(bookisbn) ) {
         //Is dc:identifier(schema=isbn) actually used?
         outp.push({
             type:       'page',
@@ -60,6 +141,7 @@
             label:      'ISBN',
         });
         page = true;
+    /*
     } else if ( window.location.href.indexOf('amazon.') > -1 &&
                ( window.location.href.indexOf('/dp/') > -1 || 
                  window.location.href.indexOf('/ASIN/') > -1 || 
@@ -75,7 +157,7 @@
                 });
             }
         });
-        page = true;
+        page = true;*/
     } else if ( m = window.location.href.indexOf('josiah.brown.edu') > -1 ) {
         //Josiah Classic.
         var bib = /b[0-9]{7}/i.exec(document.body.textContent);
@@ -134,7 +216,7 @@
             type:       'page',
             match:      doi.textContent,
             clas:       'doi',
-            label:      'DOI',
+            label:      labels['doi'],
         });
         console.log(outp);
         page = true;
@@ -143,15 +225,22 @@
             type:       'page',
             match:      pmid.attributes.content.value,
             clas:       'pmid',
-            label:      'PubMed ID',
+            label:      labels['pmid'],
         });
         page = true;
+    } else if ( urlmatch ) {
+        outp.push({
+            type:       'page',
+            match:      urlmatch.match,
+            clas:       urlmatch.type,
+            label:      labels[urlmatch.type],
+        })
     } else {
         outp.push({
             type:       'page',
             match:      window.location.href,
             clas:       'url',
-            label:      'URL',
+            label:      labels['url'],
         })
     }
     return outp;

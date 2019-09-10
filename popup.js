@@ -10,8 +10,8 @@ function setStatus(newstat) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('logo').setAttribute('src', ocra_logo_image);
-    setStatus(ocra_status_start);
+    document.getElementById('logo').setAttribute('src', OCRA_LOGO_IMAGE);
+    setStatus(OCRA_STATUS_START);
 
     chrome.tabs.executeScript({file: 'content.js'}, function(data) {
         if ( undefined !== data && data[0].length > 0 ) {
@@ -21,20 +21,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 lst = el.getElementsByTagName('ul')[0];
                 if ( 'page' == m.type ) {
                     document.getElementById('thispage').removeAttribute('hidden');
-                    lnkurl = ocra_target_page+'?'+m.clas+'='+m.match;
+                    lnkurl = OCRA_TARGET_PAGE+'?'+m.clas+'='+m.match;
                     lnk = '<b>'+m.label+':</b> <a href="'+lnkurl+'">'+m.match+'</a>';
                 } else {
                     document.getElementById('otherids').removeAttribute('hidden');
-                    lnkurl = ocra_target_page+'?'+m.type+'='+m.match;
+                    lnkurl = OCRA_TARGET_PAGE+'?'+m.type+'='+m.match;
                     lnk = '<a href="'+lnkurl+'">'+m.match+'</a>';
                 }
                 lst.innerHTML += "<li>"+lnk+"</li>\n";
             });
 
-            setStatus(ocra_status_ready);
-            $('#tabName').blur();
+            setStatus(OCRA_STATUS_READY);
         } else {
-            setStatus(ocra_status_nothing_to_do);
+            setStatus(OCRA_STATUS_NOTHING_TO_DO);
         }
     });
 });
