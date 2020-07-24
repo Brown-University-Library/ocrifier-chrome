@@ -84,7 +84,7 @@
         new Matcher(/[^\d\-]((\d-?){11}[\dx])[^\d\-]/gi, 'isbn'),
         new Matcher(/[^\d\-](\d{9}[\dx])[^\d\-]/gi, 'isbn'),
         new Matcher(/[^\d\-](978\-?\d{10})[^\d\-]/g, 'isbn'),
-        new Matcher(/(10[.][0-9]{3,}(?:[.][0-9]+)*\/(?:(?!["&\'?<>])\S)+)/g, 'doi'),
+        new Matcher(/(10[.][0-9]{3,6}(?:[.][0-9]+)*\/(?:(?!["&\'?<>])\S)+)/g, 'doi'),
         new Matcher(/(OL\d{2,10}[WM])/g, 'olid'),
         new Matcher(/(ocm\d{8})/g, 'oclc'),
         new Matcher(/(ocn\d{9})/g, 'oclc'),
